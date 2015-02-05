@@ -13,7 +13,7 @@ The OpenAS2 code base was confusing to work with, and configuration was, for me,
  * Java 1.7/1.8 compatible
  * Gradle 2.2+ for building (not using gradle wrapper yet)
  * Latest Bouncy Castle libraries (`jdk15on`) and changes to support them
- * Read `P12` and `cer` files for company and partner, respecitively
+ * Read `P12` and `cer` files for company and partner, respectively
  * HTTP server re-written to use [Apache Http Components](http://hc.apache.org/)
  * Message bus by [MBassador](https://github.com/bennidi/mbassador)
  * DI by [Google Guice](https://github.com/google/guice) *with unfortunate guava dependency*
@@ -60,7 +60,7 @@ Here are the steps:
     
 
 Configuration File
-----
+------------------
 
 The configuration file is a basic JSON file, `config.json`:
 
