@@ -1,0 +1,12 @@
+dependencies {
+    // compile implies 'runtime', so no need to declare again
+    compile(
+            'javax.mail:mail:1.4.7',
+            'org.apache.httpcomponents:httpclient:4.3.4',
+            'org.apache.httpcomponents:httpmime:4.2.6',
+    )
+}
+
+jar {
+    archiveName "cleanas2-common-${version}.jar"
+}

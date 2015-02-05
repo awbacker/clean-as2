@@ -1,0 +1,47 @@
+{
+    "server": {
+        "directories": {
+            "certificates": "{home}/certs/",
+            "system": "{home}/system/"
+        },
+        "url": "http://10.204.3.21",
+        "ports": {
+            "receiveFile": 10090,
+            "receiveMdn": 10091
+        }
+    },
+
+    "company": {
+        "as2id": "ab-client",
+        "name": "Power E2E Test Company",
+        "email": "ab-client@powere2e.com",
+        "certificate": {
+            "file": "ab-client.p12",
+            "password": "12345678"
+        },
+        "logging": {
+            "id": "20109320",
+            "type": "R",
+            "name": "Old Camel Consulting"
+        }
+    },
+
+    "partners": [
+        {
+            "as2id": "ab-server",
+            "name": "Someone AAA",
+            "description": "On the old cyclone test server",
+            "email": "someone@oldas2.server.com",
+            "certificate": "ab-server.cer",
+            "sendSettings": {
+                "mdnMode": "standard",
+                "url": "http://10.204.2.97:4080/exchange/ab-server",
+                "signAlgorithm": "sha1",
+                "mdnOptions": "signed-receipt-protocol=optional, pkcs7-signature; signed-receipt-micalg=optional, sha1"
+            }
+        }
+    ]
+}
+
+
+

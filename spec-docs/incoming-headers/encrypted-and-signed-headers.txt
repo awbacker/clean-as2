@@ -1,0 +1,49 @@
+ENCRYPTED AND SIGNED
+    * Encryption is used (3DES 168)
+    * Document is signed
+    * Receipt is requested
+    * Receipt must be signed
+
+These headers are from a document sent by Cyclone, that is both encrypted and signed!
+They are the HTTP HEADERS
+------------------------------------------------------------------------------------------------------------------------
+    Incoming Request Headers: {
+        Message-ID: <#ab-server#BINARY#a1415003817843ab-serveroutab-server#@cyclone-001>
+        Date: Mon, 03 Nov 2014 08:36:57 GMT
+        From: ab-server
+        Subject: ab-client;ab-server
+        Mime-Version: 1.0
+        Content-Type: application/pkcs7-mime; smime-type=enveloped-data; name=smime.p7m
+        Content-Transfer-Encoding: binary
+        Content-Disposition: attachment; filename=smime.p7m
+        Recipient-Address: 10.204.3.21//
+        Disposition-Notification-To: http://10.204.2.97:4080/exchange/ab-server
+        Disposition-Notification-Options: signed-receipt-protocol=optional, pkcs7-signature; signed-receipt-micalg=optional, md5
+        Receipt-Delivery-Option: http://10.204.2.97:4080/exchange/ab-server
+        AS2-From: ab-server
+        AS2-To: ab-client
+        AS2-Version: 1.1
+        Host: 10.204.3.21:10090
+        Connection: close
+        Content-Length: 669305
+    }
+
+These are the RAW headers on the MIME data received (MimeBodyPart)
+------------------------------------------------------------------------------------------------------------------------
+    Incoming MimeBodyPart Headers : {
+        "Content-Type": "application/pkcs7-mime; smime-type=enveloped-data; name=smime.p7m"
+    }
+
+These are the headers AFTER decryption (but not verifying and removing the signature)
+------------------------------------------------------------------------------------------------------------------------
+    Decrypted MimeBodyPart Headers : {
+        "Content-Type": "multipart/signed; \r\n\tboundary=\"----=_Part_12_5002337.1415003817966\"; protocol=\"application/pkcs7-signature\"; micalg=\"md5\""
+    }
+
+These are the headers on the final MimeBodyPart after verifying and removing the signature that will be saved
+------------------------------------------------------------------------------------------------------------------------
+    De-signed MimeBodyPart Headers : {
+        "Content-Disposition": "attachment; filename=\"San Francisco, Richmond District.jpg\""
+        "Content-Transfer-Encoding": "binary"
+        "Content-Type": "application/octet-stream; \r\n\tname=\"San Francisco, Richmond District.jpg\""
+    }

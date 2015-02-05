@@ -1,0 +1,47 @@
+{
+    "server": {
+        "directories": {
+            "certificates": "{home}/certs/",
+            "system": "{home}/system/"
+        },
+        "url": "http://localhost",
+        "ports": {
+            "receiveFile": ##file_port##,
+            "receiveMdn": ##mdn_port##
+        }
+    },
+
+    "company": {
+        "as2id": "##name##",
+        "name": "Test Company ##name##",
+        "email": "##name##@corp.com",
+        "certificate": {
+            "file": "##name##.p12",
+            "password": "##password##"
+        },
+        "logging": {
+            "id": "20109320",
+            "type": "R",
+            "name": "Old Camel Consulting"
+        }
+    },
+
+    "partners": [
+        {
+            "as2id": "##partner##",
+            "name": "Partner ##partner##",
+            "description": "Description of who this partner is",
+            "email": "##partner##@corp.com",
+            "certificate": "##partner##.crt",
+            "sendSettings": {
+                "mdnMode": "async",
+                "url": "http://localhost:##partner_mdn_port##/",
+                "signAlgorithm": "sha1",
+                "mdnOptions": "signed-receipt-protocol=optional, pkcs7-signature; signed-receipt-micalg=optional, sha1"
+            }
+        }
+    ]
+}
+
+
+

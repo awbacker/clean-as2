@@ -1,0 +1,41 @@
+ENCRYPTED ONLY
+    * Encryption is used (3DES 168)
+    * Receipt is requested
+    * Receipt must be signed
+
+HTTP HEADERS
+------------------------------------------------------------------------------------------------------------------------
+    Incoming Request Headers: {
+        Message-ID: <#ab-server#BINARY#a1415007913340ab-serveroutab-server#@cyclone-001>
+        Date: Mon, 03 Nov 2014 09:45:13 GMT
+        From: ab-server
+        Subject: ab-client;ab-server
+        Mime-Version: 1.0
+        Content-Type: application/pkcs7-mime; smime-type=enveloped-data; name=smime.p7m
+        Content-Transfer-Encoding: binary
+        Content-Disposition: attachment; filename=smime.p7m
+        Recipient-Address: 10.204.3.21//
+        Disposition-Notification-To: http://10.204.2.97:4080/exchange/ab-server
+        Disposition-Notification-Options: signed-receipt-protocol=optional, pkcs7-signature; signed-receipt-micalg=optional, md5
+        Receipt-Delivery-Option: http://10.204.2.97:4080/exchange/ab-server
+        AS2-From: ab-server
+        AS2-To: ab-client
+        AS2-Version: 1.1
+        Host: 10.204.3.21:10090
+        Connection: close
+        Content-Length: 667997
+    }
+
+These are the RAW headers on the MIME data received (MimeBodyPart) after processing by CleanAS2
+------------------------------------------------------------------------------------------------------------------------
+    Original MimeBodyPart Headers : {
+        "Content-Type": "application/pkcs7-mime; smime-type=enveloped-data; name=smime.p7m"
+    }
+
+These are the headers on the final MimeBodyPart after decrypting
+---------------------------------------------------------------------------------------------------------------------
+    Decrypted MimeBodyPart Headers : {
+        "Content-Disposition": "attachment; filename=\"San Francisco, Richmond District.jpg\""
+        "Content-Transfer-Encoding": "binary"
+        "Content-Type": "application/octet-stream; \r\n\tname=\"San Francisco, Richmond District.jpg\""
+    }

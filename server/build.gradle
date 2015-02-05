@@ -1,0 +1,48 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+dependencies {
+    // compile implies 'runtime', so no need to declare again
+    compile(
+            project(":common"),
+            'org.bouncycastle:bcmail-jdk15on:1.51',
+            'org.bouncycastle:bcprov-jdk15on:1.51',
+            'javax.mail:mail:1.4.7',
+            'commons-io:commons-io:2.4',
+            'io.fastjson:boon:0.29',
+            'org.apache.httpcomponents:httpclient:4.3.4',
+            'org.apache.httpcomponents:httpmime:4.2.6',
+            'net.engio:mbassador:1.2.0',
+            'joda-time:joda-time:2.4',
+            'com.google.inject:guice:4.0-beta4',
+            'com.powere2e:logger:1.0.06',
+    )
+}
+
+def mainClass = "org.cleanas2.server.CleanAS2Server"
+def defaultConfig = "../home/config.json"
+
+jar {
+    // at compile time, create a manifest file listing the entry point and required dependencies.
+    // with this we can do a java -jar <app jar> <config file> and ignore class path settings, etc
+    manifest {
+        attributes 'Main-Class': mainClass
+        attributes 'Class-Path': configurations.runtime.files.collect { it.name }
+                .unique()
+                .sort()
+                .join(' ')
+    }
+    archiveName "cleanas2-server-${version}.jar"
+}
+
+run {
+    standardInput = System.in
+    args = [defaultConfig]
+    mainClassName = mainClass
+    applicationDefaultJvmArgs = [
+            "-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog",
+            "-Dorg.apache.commons.logging.simplelog.defaultlog=DEBUG",
+            "-Dorg.apache.commons.logging.simplelog.log.org.apache.http=INFO",
+            "-Dorg.apache.commons.logging.simplelog.log.org.apache.http.wire=INFO"
+    ]
+}
