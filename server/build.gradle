@@ -1,21 +1,19 @@
-apply plugin: 'java'
-apply plugin: 'application'
+plugins {
+    id "java"
+    id "application"
+    id "org.jetbrains.kotlin.jvm" version "1.2.10"
+}
 
 dependencies {
-    // compile implies 'runtime', so no need to declare again
+    // see the root build.grade for the common dependencies
     compile(
             project(":common"),
             'org.bouncycastle:bcmail-jdk15on:1.51',
             'org.bouncycastle:bcprov-jdk15on:1.51',
-            'javax.mail:mail:1.4.7',
-            'commons-io:commons-io:2.4',
-            'io.fastjson:boon:0.29',
-            'org.apache.httpcomponents:httpclient:4.3.4',
-            'org.apache.httpcomponents:httpmime:4.2.6',
+
             'net.engio:mbassador:1.2.0',
             'joda-time:joda-time:2.4',
             'com.google.inject:guice:4.0-beta4',
-            'com.powere2e:logger:1.0.06',
     )
 }
 

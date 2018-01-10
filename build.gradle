@@ -1,32 +1,39 @@
 allprojects {
-    // common settings for all the sub-projects, to avoid re-stating them in each build.config.
-    // also,
+    apply plugin:"java"
 
-    apply plugin: 'java'
-    apply plugin: 'idea'
-    apply plugin: 'eclipse'
-
-    sourceCompatibility = 1.7
-
+    // common settings for all the sub-projects, to avoid re-stating them in each build.gradle
+    sourceCompatibility = 1.8
     group = 'org.cleanas2'
-    version = '1.0'
+    version = '1.1.0'
 }
 
 subprojects {
+    // settings that are applied to all sub projects (from settings.gradle)
 
     repositories {
         mavenLocal()
         mavenCentral()
-        maven { url 'http://10.204.13.131:8081/artifactory/escm-release-local' }
     }
 
     dependencies {
-        compile 'commons-logging:commons-logging:1.1.3'
-        compile 'commons-lang:commons-lang:2.4'
-        compile 'io.fastjson:boon:0.29'
-        testCompile 'org.testng:testng:6.1.1'
-    }
+        compile (
+                'org.apache.httpcomponents:httpclient:4.5.4',
+                'org.apache.httpcomponents:httpmime:4.5.4',
+                'org.apache.commons:commons-lang3:3.6',
+                'commons-logging:commons-logging:1.2',
+                'commons-io:commons-io:2.6',
+                'junit:junit:4.12',
 
+                'javax.mail:mail:1.4.7',
+                'io.fastjson:boon:0.34',
+
+                // kotlin support for jdk8 (https://kotlinlang.org/docs/reference/using-gradle.html#plugin-and-versions)
+                "org.jetbrains.kotlin:kotlin-stdlib-jdk8",
+        )
+        testCompile (
+                'org.testng:testng:6.13.1'
+        )
+    }
 }
 
 task run {
@@ -36,18 +43,18 @@ task run {
     dependsOn ":server:run"
 }
 
-
-task compileToBin(type: Sync) {
-    dependsOn build
-    dependsOn ":server:jar" // force server to generate it's jars, which will include the dependency on common
-    description 'Copies the AS2 jar and all runtime jars to the ./bin directory'
-
-    into "$projectDir/bin"
-    from(
-            project(":server").configurations.runtime,
-            project(":server").jar.outputs // this should include both the server & common jars
-    )
-}
+//
+//task compileToBin(type: Sync) {
+//    dependsOn build
+//    dependsOn ":server:jar" // force server to generate it's jars, which will include the dependency on common
+//    description 'Copies the AS2 jar and all runtime jars to the ./bin directory'
+//
+//    into "$projectDir/bin"
+//    from(
+//        project(":server").configurations.runtime,
+//        project(":server").jar.outputs // this should include both the server & common jars
+//    )
+//}
 
 //task dist << { // kept as a sample
 //    project.copy {

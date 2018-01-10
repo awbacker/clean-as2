@@ -17,7 +17,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.*;
 import java.io.IOException;
 
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.boon.Maps.map;
 import static org.cleanas2.util.AS2Util.*;
 

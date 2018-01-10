@@ -1,6 +1,6 @@
 package org.cleanas2.message;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.boon.core.reflection.BeanUtils;
 import org.cleanas2.common.ConnectionInfo;
 

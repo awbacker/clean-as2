@@ -1,6 +1,6 @@
 package org.cleanas2.cmd;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.boon.Str;
@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import java.io.*;
 import java.util.LinkedList;
 
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.boon.Lists.list;
 import static org.boon.primitive.Arry.array;
 

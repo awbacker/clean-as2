@@ -8,3 +8,4 @@ home/outbox
 home/inbox
 script/home
 script/temp
+out/

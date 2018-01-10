@@ -29,7 +29,7 @@ import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 
 import static java.lang.String.format;
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Sends an MDN in response to a file being received

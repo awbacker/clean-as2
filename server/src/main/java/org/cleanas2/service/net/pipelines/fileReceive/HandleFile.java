@@ -14,7 +14,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.ContentDisposition;
 import java.text.MessageFormat;
 
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Handles a request IF it is an incoming file request.  Incoming ASYNC MDN requests can be received

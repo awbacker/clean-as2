@@ -6,7 +6,7 @@ import org.cleanas2.common.annotation.Command;
 import javax.inject.Singleton;
 import java.util.*;
 
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.cleanas2.util.AS2Util.newCaseInsensitiveMap;
 
 /**

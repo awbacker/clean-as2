@@ -3,7 +3,7 @@ package org.cleanas2.util;
 import java.nio.file.*;
 import java.util.*;
 
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Helper class for random utils that don't have another place to live

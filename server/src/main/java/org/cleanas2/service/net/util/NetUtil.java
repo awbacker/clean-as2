@@ -11,7 +11,7 @@ import javax.mail.internet.InternetHeaders;
 import java.net.Socket;
 import java.util.*;
 
-import static org.apache.commons.lang.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.apache.http.HttpStatus.*;
 import static org.boon.Lists.list;
 import static org.cleanas2.util.AS2Util.getOrDefault;

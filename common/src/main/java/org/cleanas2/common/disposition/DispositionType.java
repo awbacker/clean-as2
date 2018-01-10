@@ -1,6 +1,6 @@
 package org.cleanas2.common.disposition;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.boon.Lists;
 import org.boon.Str;
 

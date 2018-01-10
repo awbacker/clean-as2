@@ -1,6 +1,6 @@
 package org.cleanas2.test;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.boon.Lists;
 import org.boon.Str;
 import org.boon.core.Function;

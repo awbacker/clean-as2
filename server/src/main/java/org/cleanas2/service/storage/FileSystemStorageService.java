@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.nio.file.*;
 
 import static java.nio.file.StandardOpenOption.*;
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * @author Andrew Backer {@literal awbacker@gmail.com / andrew.backer@powere2e.com}

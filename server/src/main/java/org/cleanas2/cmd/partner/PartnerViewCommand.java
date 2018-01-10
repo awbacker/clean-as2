@@ -1,6 +1,6 @@
 package org.cleanas2.cmd.partner;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.boon.Str;
 import org.cleanas2.cmd.CommandBase;
 import org.cleanas2.cmd.CommandResult;
