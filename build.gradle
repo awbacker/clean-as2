@@ -1,5 +1,5 @@
 allprojects {
-    apply plugin:"java"
+    apply plugin: "java"
 
     // common settings for all the sub-projects, to avoid re-stating them in each build.gradle
     sourceCompatibility = 1.8
@@ -16,7 +16,7 @@ subprojects {
     }
 
     dependencies {
-        compile (
+        compile(
                 'org.apache.httpcomponents:httpclient:4.5.4',
                 'org.apache.httpcomponents:httpmime:4.5.4',
                 'org.apache.commons:commons-lang3:3.6',
@@ -30,7 +30,7 @@ subprojects {
                 // kotlin support for jdk8 (https://kotlinlang.org/docs/reference/using-gradle.html#plugin-and-versions)
                 "org.jetbrains.kotlin:kotlin-stdlib-jdk8",
         )
-        testCompile (
+        testCompile(
                 'org.testng:testng:6.13.1'
         )
     }
@@ -43,18 +43,20 @@ task run {
     dependsOn ":server:run"
 }
 
-//
-//task compileToBin(type: Sync) {
-//    dependsOn build
-//    dependsOn ":server:jar" // force server to generate it's jars, which will include the dependency on common
-//    description 'Copies the AS2 jar and all runtime jars to the ./bin directory'
-//
-//    into "$projectDir/bin"
-//    from(
-//        project(":server").configurations.runtime,
-//        project(":server").jar.outputs // this should include both the server & common jars
-//    )
-//}
+
+task compileToBin(type: Sync) {
+    dependsOn build
+    dependsOn ":server:jar" // force server to generate it's jars, which will include the dependency on common
+
+    description 'Copies the AS2 jar and all runtime jars to the ./bin directory'
+
+    from(
+            project(':server').configurations.runtime,
+            project(':server').jar.outputs // this should include both the server & common jars
+    )
+    into "$projectDir/bin"
+
+}
 
 //task dist << { // kept as a sample
 //    project.copy {

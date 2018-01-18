@@ -1,20 +1,19 @@
 package org.cleanas2.server
 
 import com.google.inject.Guice
-import com.google.inject.Injector
-import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
+import org.boon.Lists.list
 import org.cleanas2.cmd.CommandLineService
 import org.cleanas2.common.service.ConfigurableService
 import org.cleanas2.service.*
-import org.cleanas2.service.net.*
+import org.cleanas2.service.net.AsyncMdnReceiverService
+import org.cleanas2.service.net.AsyncMdnSenderService
+import org.cleanas2.service.net.FileReceiverService
+import org.cleanas2.service.net.FileSenderService
 import org.cleanas2.service.polling.DirectoryPollingService
 import org.cleanas2.service.storage.FileSystemStorageService
-
-import java.io.File
-
-import org.boon.Lists.list
 import org.cleanas2.util.AS2Util.ofType
+import java.io.File
 
 /**
  * Ugly default server startup code
@@ -54,7 +53,7 @@ object CleanAS2Server {
         val i = Guice.createInjector(JsonConfiguredServerModule(c))
 
         ServerSession.initialize(i)
-        val session = ServerSession.session
+        val session = ServerSession.session!!
 
         // create the additional services
         val services = list(
@@ -75,10 +74,11 @@ object CleanAS2Server {
         )
 
         for (c1 in services) {
-            session!!.startService(c1)
+            println("Starting Service $c1")
+            session.startService(c1)
         }
 
-        val configable = ofType(session!!.getAllServices(), ConfigurableService::class.java)
+        val configable = ofType(session.getAllServices(), ConfigurableService::class.java)
 
         for (svc in configable) {
             svc.initialize()

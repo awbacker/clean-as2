@@ -19,11 +19,9 @@ import javax.inject.Inject
 class CommandLineHandler @Inject
 constructor(private val cmdManager: CommandManager) : Thread() {
     private val reader: BufferedReader = BufferedReader(InputStreamReader(System.`in`))
-    private val writer: BufferedWriter
+    private val writer: BufferedWriter = BufferedWriter(OutputStreamWriter(System.out))
 
     init {
-        writer = BufferedWriter(OutputStreamWriter(System.out))
-
         // add all the commands! yay!
         val fcps = FastClasspathScanner(array("org.cleanas2.cmd"))
 

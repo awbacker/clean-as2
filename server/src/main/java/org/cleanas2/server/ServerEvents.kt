@@ -5,7 +5,6 @@ package org.cleanas2.server
 //import com.powere2e.platform.log.enumeration.EventLevel;
 
 import org.apache.commons.io.FilenameUtils
-import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.cleanas2.bus.ServerEventMsg
 import org.cleanas2.common.serverEvent.EventLevel
@@ -31,49 +30,33 @@ object ServerEvents {
     private val processName: String
         get() = "AS2"
 
-    fun heartbeat(isBusy: Boolean) {
-
-        //        CustomerType ct = CustomerType.valueOf(getConfiguration().getCompanyType());
-
-        //        HeartBeatTool.getInstance().appendInfo(
-        //                getConfiguration().getCompanyId(),
-        //                getConfiguration().getCompanyName(),
-        //                ct,
-        //                "LOC",
-        //                Plugable.PluginType.SD,
-        //                "",
-        //                "传输端发送",
-        //                "AS2",
-        //                isBusy);
-    }
-
     fun Info(phase: Phase, messageId: String, message: String) {
         val msg = ServerEventMsg(phase, EventLevel.Info, message, message)
         MessageBus.publishAsync(msg)
     }
 
     fun Error(phase: Phase, messageId: String, message: String) {
-        val msg = ServerEventMsg(phase, EventLevel.Info, message, message)
+        val msg = ServerEventMsg(phase, EventLevel.Info, messageId, message)
         MessageBus.publishAsync(msg)
     }
 
     fun Error(phase: Phase, messageId: String, message: String, error: Throwable?) {
-        val msg = ServerEventMsg(phase, EventLevel.Error, message, message, error)
+        val msg = ServerEventMsg(phase, EventLevel.Error, messageId, message, error)
         MessageBus.publishAsync(msg)
     }
 
 
     /* MDN RECEIVE LOGS */
     fun mdnReceiveStart(msg: OutgoingFileMessage) {
-        ServerEvents.doLogMessageInfo(EventLevel.Info, Phase.MDN_RECEIVE, msg, null, "MDN Receive - Start")
+        ServerEvents.doLogMessageInfo(msg, null, "MDN Receive - Start")
     }
 
     fun mdnReceiveEnd(msg: OutgoingFileMessage) {
-        ServerEvents.doLogMessageInfo(EventLevel.Info, Phase.MDN_RECEIVE, msg, null, "MDN Receive - End")
+        ServerEvents.doLogMessageInfo(msg, null, "MDN Receive - End")
     }
 
     fun mdnReceiveInfo(msg: OutgoingFileMessage, message: String) {
-        ServerEvents.doLogMessageInfo(EventLevel.Info, Phase.MDN_RECEIVE, msg, null, "MDN Receive - " + message)
+        ServerEvents.doLogMessageInfo(msg, null, "MDN Receive - " + message)
     }
 
     fun mdnReceiveError(msg: OutgoingFileMessage, exception: Exception) {
@@ -81,21 +64,21 @@ object ServerEvents {
     }
 
     fun mdnReceiveError(msg: OutgoingFileMessage, exception: Exception?, message: String) {
-        ServerEvents.doLogMessageInfo(EventLevel.Error, Phase.MDN_RECEIVE, msg, exception, "MDN Receive - Error - " + message)
+        ServerEvents.doLogMessageInfo(msg, exception, "MDN Receive - Error - " + message)
     }
 
     /* ASYNC MDN RECEIVE LOGS */
 
     fun mdnAsyncReceiveStart(msg: OutgoingFileMessage) {
-        ServerEvents.doLogMessageInfo(EventLevel.Info, Phase.ASYNC_MDN_RECEIVE, msg, null, "ASYNC MDN Receive - Start")
+        ServerEvents.doLogMessageInfo(msg, null, "ASYNC MDN Receive - Start")
     }
 
     fun mdnAsyncReceiveEnd(msg: OutgoingFileMessage) {
-        doLogMessageInfo(EventLevel.Info, Phase.ASYNC_MDN_RECEIVE, msg, null, "ASYNC MDN Receive - End")
+        doLogMessageInfo(msg, null, "ASYNC MDN Receive - End")
     }
 
     fun mdnAsyncReceiveInfo(msg: OutgoingFileMessage, message: String) {
-        doLogMessageInfo(EventLevel.Info, Phase.ASYNC_MDN_RECEIVE, msg, null, "ASYNC MDN Receive - " + message)
+        doLogMessageInfo(msg, null, "ASYNC MDN Receive - " + message)
     }
 
     fun mdnAsyncReceiveError(msg: OutgoingFileMessage, exception: Exception) {
@@ -103,72 +86,58 @@ object ServerEvents {
     }
 
     fun mdnAsyncReceiveError(msg: OutgoingFileMessage, exception: Exception, message: String) {
-        doLogMessageInfo(EventLevel.Error, Phase.ASYNC_MDN_RECEIVE, msg, exception, message)
+        doLogMessageInfo(msg, exception, message)
     }
 
     /* MDN SEND LOGS */
 
     fun mdnSendStart(msg: OutgoingFileMessage) {
-        ServerEvents.doLogMessageInfo(EventLevel.Info, Phase.MDN_SEND, msg, null, "MDN Send - Start")
+        ServerEvents.doLogMessageInfo(msg, null, "MDN Send - Start")
     }
 
     fun mdnSendEnd(msg: OutgoingFileMessage) {
-        ServerEvents.doLogMessageInfo(EventLevel.Info, Phase.MDN_SEND, msg, null, "MDN Send - End")
+        ServerEvents.doLogMessageInfo(msg, null, "MDN Send - End")
     }
 
     fun mdnSendInfo(msg: OutgoingFileMessage, message: String) {
-        ServerEvents.doLogMessageInfo(EventLevel.Info, Phase.MDN_SEND, msg, null, "MDN Send - " + message)
+        ServerEvents.doLogMessageInfo(msg, null, "MDN Send - " + message)
     }
 
     fun mdnSendError(msg: OutgoingFileMessage, exception: Exception, message: String) {
-        ServerEvents.doLogMessageInfo(EventLevel.Error, Phase.MDN_SEND, msg, exception, "MDN Send - Error - " + message)
+        ServerEvents.doLogMessageInfo(msg, exception, "MDN Send - Error - " + message)
     }
 
     /* ASYNC MDN SEND LOGS */
 
     fun mdnAsyncSendStart(msg: OutgoingFileMessage) {
-        ServerEvents.doLogMessageInfo(EventLevel.Info, Phase.ASYNC_MDN_SEND, msg, null, "ASYNC MDN Send - Start")
+        ServerEvents.doLogMessageInfo(msg, null, "ASYNC MDN Send - Start")
     }
 
     fun mdnAsyncSendEnd(msg: OutgoingFileMessage) {
-        ServerEvents.doLogMessageInfo(EventLevel.Info, Phase.ASYNC_MDN_SEND, msg, null, "ASYNC MDN Send - End")
+        ServerEvents.doLogMessageInfo(msg, null, "ASYNC MDN Send - End")
     }
 
     fun mdnAsyncSendInfo(msg: OutgoingFileMessage, message: String) {
-        ServerEvents.doLogMessageInfo(EventLevel.Info, Phase.ASYNC_MDN_SEND, msg, null, "ASYNC MDN Send - " + message)
+        ServerEvents.doLogMessageInfo(msg, null, "ASYNC MDN Send - " + message)
     }
 
     fun mdnAsyncSendError(msg: OutgoingFileMessage, exception: Exception, message: String) {
-        ServerEvents.doLogMessageInfo(EventLevel.Error, Phase.ASYNC_MDN_SEND, msg, exception, "ASYNC MDN Send - Error - " + message)
+        ServerEvents.doLogMessageInfo(msg, exception, "ASYNC MDN Send - Error - " + message)
     }
 
 
     /* UTILITY FUNCTIONS */
 
     private fun doLogMessageInfo(level: EventLevel, phase: Phase, as2message: OutgoingFileMessage, message: String) {
-        ServerEvents.doLogMessageInfo(level, phase, as2message, null, message)
+        ServerEvents.doLogMessageInfo(as2message, null, message)
     }
 
-    private fun doLogMessageInfo(level: EventLevel, phase: Phase, as2message: OutgoingFileMessage, exception: Exception?, message: String) {
+    private fun doLogMessageInfo(as2message: OutgoingFileMessage, exception: Exception?, message: String) {
         if (exception != null && printException) {
             logger.error(message + "[" + getFilenameFromMessage(as2message) + "] - " + as2message.loggingText, exception)
         } else {
             logger.info(message + "[" + getFilenameFromMessage(as2message) + "] - " + as2message.loggingText)
         }
-
-        //        CustomerType ct = CustomerType.valueOf(getConfiguration().getCompanyType());
-
-        //        LogUtil.getInstance().appendTransLog(
-        //                getConfiguration().getCompanyId(),
-        //                getConfiguration().getCompanyName(),
-        //                ct,
-        //                eventLevel,
-        //                getFilePathFromMessage(as2message),
-        //                "",
-        //                phase.name(),
-        //                exception,
-        //                message
-        //        );
     }
 
     /**

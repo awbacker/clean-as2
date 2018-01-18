@@ -10,8 +10,8 @@ import javax.inject.Singleton
  * @author Andrew Backer awbacker@gmail.com / andrew.backer@powere2e.com
  */
 @Singleton
-class CommandLineService @Inject
-constructor(private val cl: CommandLineHandler) : ConfigurableService, StoppableService {
+class CommandLineService
+@Inject constructor(private val cl: CommandLineHandler) : ConfigurableService, StoppableService {
 
     @Throws(Exception::class)
     override fun initialize() {
@@ -22,4 +22,5 @@ constructor(private val cl: CommandLineHandler) : ConfigurableService, Stoppable
     override fun stop() {
         cl.interrupt()
     }
+
 }

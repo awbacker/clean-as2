@@ -2,7 +2,6 @@ package org.cleanas2.server
 
 import com.google.inject.AbstractModule
 import org.boon.json.JsonFactory
-import org.boon.json.ObjectMapper
 import org.cleanas2.config.json.JsonConfigMap
 
 /**
@@ -16,5 +15,4 @@ class JsonConfiguredServerModule(private val config: CommandLineConfig) : Abstra
         bind(JsonConfigMap::class.java).toInstance(configMap)
         bind(CommandLineConfig::class.java).toInstance(config)
     }
-
 }
